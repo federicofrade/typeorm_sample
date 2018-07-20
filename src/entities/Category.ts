@@ -10,14 +10,16 @@ export class Category {
     @Column()
     name: string;
 
-    //MAL: Lazy Relation only
+    //WRONG ! Lazy Relation only: It doesn't save the questions at saving the category.
     /*@ManyToMany(type => Question, question => question.categories)
     questions: Promise<Question[]>;*/
 
-    //MAL Cascade Way Only: Guarda bien, pero no permite hacer el .questions al hacer el find (lo devuelve como undefined siempre)
+    /*WRONG ! Cascade Way Only: It save the questions at saving the category but you can't reference the questions from category
+        (category.questions) because it is always undifined.
     /*@ManyToMany(type => Question, question => question.categories, {cascade: true})
     questions: Question[];*/
 
+    //Right !
     @ManyToMany(type => Question, question => question.categories, {cascade: true})
     questions: Promise<Question[]>;
 
