@@ -58,7 +58,8 @@ createConnection({
             cat_questions.push(question2);
         }
         else {
-            category.questions = Promise.resolve(cat_questions);
+            let questions = [question1];
+            category.questions =  Promise.resolve(questions);
         }
         
         await getRepository(Category).save(category);
